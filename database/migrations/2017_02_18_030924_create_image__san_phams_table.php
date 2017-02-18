@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration {
+class CreateImageSanPhamsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,12 @@ class CreateUsersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('users', function(Blueprint $table)
+		Schema::create('image__san_phams', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name')->unique();
-			$table->string('email');
-			$table->string('password', 60);
-			$table->tinyInteger('level');
-			$table->rememberToken();
+			$table->string('image');
+			$table->integer('sanpham_id')->unsigned();
+			$table->foreign('sanpham_id')->references('id')->on('san_phams')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}
@@ -31,7 +29,7 @@ class CreateUsersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('users');
+		Schema::drop('image__san_phams');
 	}
 
 }
